@@ -20,9 +20,27 @@
             height: 100%;
             border: none;
         }
+
+        /* Floating open-in-new-tab button */
+        .open-top {
+            position: fixed;
+            right: 16px;
+            top: 16px;
+            background: #1e88e5;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: sans-serif;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
     <iframe src="https://labs.google/fx/tools/flow/shared/tool/590d331a-c1f5-4dcc-a7b5-56884f5def75" allow="clipboard-write; camera; microphone" allowfullscreen></iframe>
+
+    <!-- Floating button to open the Flow Labs tool in a top-level tab (required for OAuth sign-in) -->
+    <a class="open-top" href="https://labs.google/fx/tools/flow/shared/tool/590d331a-c1f5-4dcc-a7b5-56884f5def75" target="_blank" rel="noopener noreferrer">Open SkyWriter in new tab</a>
 </body>
 </html>
