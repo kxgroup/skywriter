@@ -4,43 +4,208 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyWriter Media Generator</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        /* Resets margin and padding to ensure the iframe takes up the whole screen */
+        :root {
+            --bg-dark: #0f0c29;
+            --bg-mid: #302b63;
+            --bg-light: #24243e;
+            --accent-primary: #8e2de2;
+            --accent-secondary: #4a00e0;
+            --text-main: #ffffff;
+            --text-muted: #a0aab2;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; 
-            background-color: #121212; 
-        }
-        
-        /* Forces the iframe to stretch to the edges without borders */
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-mid), var(--bg-light));
+            background-attachment: fixed;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Floating open-in-new-tab button */
-        .open-top {
-            position: fixed;
-            right: 16px;
-            top: 16px;
-            background: #1e88e5;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 6px;
+        /* Navigation Bar */
+        nav {
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            padding: 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Hero Section */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #b8c6db, #f5f7fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        /* The Launch Button */
+        .launch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-decoration: none;
-            font-family: sans-serif;
-            z-index: 9999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(142, 45, 226, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(142, 45, 226, 0.6);
+        }
+
+        .launch-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Icon inside button */
+        .launch-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .launch-btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Status Indicator */
+        .status {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00e676;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00e676;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            nav { padding: 1.5rem 2rem; }
+            .launch-btn { padding: 15px 30px; }
         }
     </style>
 </head>
 <body>
-    <iframe src="https://labs.google/fx/tools/flow/shared/tool/590d331a-c1f5-4dcc-a7b5-56884f5def75" allow="clipboard-write; camera; microphone" allowfullscreen></iframe>
 
-    <!-- Floating button to open the Flow Labs tool in a top-level tab (required for OAuth sign-in) -->
-    <a class="open-top" href="https://labs.google/fx/tools/flow/shared/tool/590d331a-c1f5-4dcc-a7b5-56884f5def75" target="_blank" rel="noopener noreferrer">Open SkyWriter in new tab</a>
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
+            </div>
+            SkyWriter
+        </div>
+    </nav>
+
+    <main>
+        <h1>Your <span class="gradient-text">Media Pipeline</span><br>is Ready.</h1>
+        <p class="subtitle">Access the latest version of the SkyWriter automated PR and visual asset generator. Hosted on Google Flow Labs and updated in real-time.</p>
+        
+        <a href="https://labs.google/fx/tools/flow/shared/tool/590d331a-c1f5-4dcc-a7b5-56884f5def75" target="_blank" class="launch-btn">
+            Launch Workspace
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+            </svg>
+        </a>
+
+        <div class="status">
+            <div class="status-dot"></div>
+            Systems Online — Latest Build Active
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 SkyWriter by KarinationGroup. For ECHO and ASCA use only.
+    </footer>
+
 </body>
 </html>
