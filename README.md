@@ -29,16 +29,58 @@ Gemini) are available but not required.
 - **[Ollama](https://ollama.com/download)** for the default local AI text engine (free) —
   setup steps below. _(Optional: a Groq or Gemini key instead — see the table at the bottom.)_
 
-## Run it
+## Download & set up (first-time users)
+
+New here? These four steps take you from nothing installed to a running app.
+
+### 1. Install the prerequisites
+
+- **[Node.js](https://nodejs.org) 18+** (includes `npm`). Verify in a terminal: `node -v`.
+- **[Git](https://git-scm.com/downloads)** — only needed for the `git clone` method in step 2.
+  Verify: `git --version`.
+- **[Ollama](https://ollama.com/download)** — the free local AI engine. You'll configure it
+  in step 4, so you can install it now or then.
+
+### 2. Get the code from GitHub
+
+**Option A — clone with Git** (recommended; makes future updates a one-liner):
 
 ```powershell
-cd C:\Users\dangv\Documents\skywriter-local
-npm install
-npm run dev
+git clone https://github.com/kxgroup/skywriter.git
+cd skywriter
 ```
 
-Vite opens <http://localhost:5173>. Then pick your providers in **⚙ Settings**. The
-default is the **free local stack** — set that up next.
+Later, pull the latest version anytime with `git pull`.
+
+**Option B — download a ZIP** (no Git required):
+
+1. Open <https://github.com/kxgroup/skywriter>.
+2. Click the green **Code** button → **Download ZIP**.
+3. Right-click the downloaded file → **Extract All…**.
+4. Open a terminal **inside** the extracted `skywriter` folder (in File Explorer:
+   address bar → type `powershell` → Enter).
+
+### 3. Install dependencies and start the app
+
+```powershell
+npm install      # one-time: downloads packages into node_modules/ (takes a minute)
+npm run dev      # starts SkyWriter at http://localhost:5173
+```
+
+Leave that terminal open and visit <http://localhost:5173> in your browser. To stop the
+app, press `Ctrl+C` in the terminal. (Prefer a real desktop app instead of a browser tab?
+See **[Build a desktop .exe](#build-a-desktop-exe)** below.)
+
+### 4. Set up the AI engine, then you're ready
+
+The app opens, but it needs a **text engine** before it can generate copy. Follow
+**[Set up the free local AI (Ollama)](#set-up-the-free-local-ai-ollama-for-text--image-analysis)**
+just below, then open **⚙ Settings** and confirm the provider. The default is the
+**free, fully-local stack** — no account or API key required.
+
+> **Troubleshooting:** `npm` not recognized? Node.js isn't installed or the terminal
+> needs reopening. `git` not recognized? Use ZIP Option B. Port 5173 busy? Vite will pick
+> the next free port — use whatever URL it prints.
 
 ## Set up the free local AI (Ollama, for text + image analysis)
 
@@ -125,10 +167,11 @@ copy) and **image** generation (renders using livery/logo as references). Both a
 
 | Slot | Local & free | Hosted & free | Paid / best |
 |---|---|---|---|
-| Text | **Ollama** (`llama3.2-vision`) | **Groq** | Gemini `gemini-2.5-flash` |
-| Image | **SD WebUI / Forge** | **Pollinations.ai** | Gemini `gemini-2.5-flash-image-preview` |
+| Text | **Ollama** (`gemma3:4b`) | **Groq** | Gemini `gemini-2.5-flash` |
+| Image _(🚧 disabled)_ | **SD WebUI / Forge** | **Pollinations.ai** | Gemini `gemini-2.5-flash-image-preview` |
 
-The default is the **fully-local, $0 stack** (Ollama + SD WebUI). See
+The default text engine is the **fully-local, $0** Ollama stack. Image generation is
+currently **under development and disabled in the UI**. See
 [FREE-MODELS.md](FREE-MODELS.md) for one-time install/setup commands.
 
 Provider code lives in [`src/lib/text.ts`](src/lib/text.ts),
